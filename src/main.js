@@ -1,18 +1,25 @@
 import Vue from 'vue'
-import App from './components/ProductList.vue'
+import router from './router'
+import contentmanager from './components/ContentManager.vue'
 
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
+
+export const API_URL = "https://storeapiexpress-sxakqkyjmw.now.sh"
+
 require('dotenv').config();
 
 Vue.use(VueMaterial)
+Vue.use(router)
 
 Vue.config.productionTip = false
 
+
 new Vue({
   el: '#mapp',
-  render: h => h(App),
+  router,
+  render: h => h(contentmanager),
   data: {
     loggedin:false,
     cart: [],

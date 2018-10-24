@@ -25,6 +25,15 @@
             <md-input v-model="imaged"></md-input> 
             </md-field>
 
+              <md-field>
+                <label for="category">Categories</label>
+                <md-select v-model="category" name="category" id="category" multiple>
+                  <md-option value="Food">Food</md-option>
+                  <md-option value="Mayo">Mayo</md-option>
+                  <md-option value="Cats">Cats</md-option>
+                </md-select>
+           </md-field>
+
             
             <md-dialog-actions>
               <md-button class="md-primary md-raised" @click="showDialog = false">Cancel</md-button>
@@ -41,6 +50,7 @@
 </template>
 
 <script>
+import { API_URL } from '../main.js'
   export default {
     name: 'CreateCard',
     data() { return{ 
@@ -48,26 +58,28 @@
       named:'',
       descd:'',
       priced:'',
-      imaged:''}
+      imaged:'',
+      category:[]}
     },
 
     methods: {
-      clickHandler() {
-          const myURL = `https://storeapiexpress-scneculmte.now.sh/products/`
+     async clickHandler() {
+          const myURL = `${API_URL}/products/`
           const reqContent = {
             method: "POST",
             headers: {"Content-Type": "application/json; charset=utf-8"},
-            body: JSON.stringify({name: this.named, desc:this.descd, price: this.priced, img: this.imaged})
+            body: JSON.stringify({name: this.named, desc:this.descd, price: this.priced, img: this.imaged, category:this.category})
           }
 
           let theReq = new Request(myURL, reqContent)
 
-          fetch(theReq) 
+         await fetch(theReq) 
               .then(res => {return res.json()})
               .then ( res => {
                res})
               .catch ()
 
+      this.$emit('pleaserefresh')
       //reset
       this.named =''
       this.descd =''
