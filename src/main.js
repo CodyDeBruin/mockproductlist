@@ -4,9 +4,10 @@ import contentmanager from './components/ContentManager.vue'
 
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
-import 'vue-material/dist/theme/default.css'
+// import 'vue-material/dist/theme/default.css'
+ import 'vue-material/dist/theme/default-dark.css' 
 
-export const API_URL = "https://storeapiexpress-sxakqkyjmw.now.sh"
+export const API_URL = "http://localhost:443"
 
 require('dotenv').config();
 
